@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>30x30</title>
+  </head>
+  <body>
+    <script type="text/template" id="src">
+
+
+# 30x30
+
+30x30 is an initiative to get 30% of worldwide land and sea protected by 2030.
+
+The UK is one of many nations that have pledged to meet the target. Our committment was [announced by Boris Johnson](https://www.gov.uk/government/news/pm-commits-to-protect-30-of-uk-land-in-boost-for-biodiversity) as part of the [Leaders' Pledge for Nature](https://www.leaderspledgefornature.org).
+
+But which land and sea areas should the UK choose to protect to get to the 30% target by 2030?
+
+That's the question the group of people that set up the [30x30 GitHub Organisation](https://github.com/30x30) aim to answer at the [MET Office Climate Data Challenge](https://www.eventbrite.co.uk/e/met-office-climate-data-challenge-tickets-136251966299).
+
+It isn't a trivial question, and it beings up other questions like:
+
+* What does protection mean anyway? See [ICUN on WikiPedia](https://en.wikipedia.org/wiki/IUCN_protected_area_categories)
+* Should the UK optimise for maximum carbon capture, greatest biodiversity increase, or simply ease of meeting the commitment?
+* How would the areas we choose be affected by what we know the climate will be like in future as a result of climate change?
+
+The team aim to:
+
+* Prototype scenarios based on different expertise to highlight the different consequences of different approaches
+* Produce a visual summary of the context, and the specific scenarios explored. Perhaps a poster?
+
+## Background
+ 
+30x30 today isn't so much a formal campaign owned by a single organisation as an idea that lots of organisations stand behind. It started at Greenpeace with the publication of [A Blueprint for Ocean Protection](https://www.greenpeace.org/international/publication/21604/30x30-a-blueprint-for-ocean-protection/) but has taken on a wider significance as land has been included in the target too.
+
+See the [Campaign for Nature 30x30](https://www.campaignfornature.org/news/category/30x30) site or the information on the [Marine Conservation Society](https://marine-conservation.org/30x30/) site.
+
+## Data
+
+EU-wide statistics (still relevant for the UK until 2020):
+
+* https://ec.europa.eu/eurostat/documents/3217494/10317767/KS-FK-19-001-EN-N.pdf/742d3fd2-961e-68c1-47d0-11cf30b11489
+ 
+Agricultural data can be found here:
+
+* https://ec.europa.eu/eurostat/web/agriculture/agri-environmental-indicators
+
+Marine Protected Areas
+
+* https://jncc.gov.uk/our-work/marine-protected-area-mapper/
+
+## Related
+
+* https://www.gov.uk/government/publications/final-report-the-economics-of-biodiversity-the-dasgupta-review
+
+    </script>
+    <div id="dst"></div>
+    <script src="https://unpkg.com/commonmark@0.29.3/dist/commonmark.js"></script>
+    <style>
+      html {
+         font-family: -apple-system, Helvetica, Arial, sans-serif;
+      }
+      html, body, input, textarea, input[type="submit"] {
+         font-size: 20px;
+      }
+      body {
+         margin: 0 auto;
+         max-width: 48rem;
+         box-sizing: border-box;
+         padding: 1rem;
+         line-height: 1.3rem;
+      }
+      h1 {
+         font-size: 3rem;
+         line-height: 4rem;
+         text-align: center;
+      }
+      h2 {
+         line-height: 2rem;
+      }
+      a, a:visited, a:hover, a:link {
+          color:rgb(0, 0, 238);
+      }
+      @media only screen and (max-width: 640px) {
+        html, body, input, textarea, input[type="submit"] {
+           font-size: 16px;
+        }
+        form, form textarea, form input, form input[type="text"] {
+          max-width: 90%;
+        }
+      }
+    </style>
+    <script>
+      var srcElem = document.getElementById('src')
+      var reader = new commonmark.Parser(srcElem.innerHTML);
+      var parsed = reader.parse(srcElem.innerHTML)
+      var writer = new commonmark.HtmlRenderer();
+      var result = writer.render(parsed)
+      document.getElementById('dst').innerHTML = result
+      srcElem.style.display = 'none';
+    </script>
+  </body>
+</html>
