@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>30x30</title>
     <link href="styles.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
       crossorigin=""/>
+    <link rel="stylesheet" href="http://eclipse1979.github.io/leaflet.slider/dist/leaflet-slider.css">
   </head>
   <body>
     <script type="text/template" id="src">
@@ -13,6 +16,9 @@
 # Protection
 
 This is an evolving version of a map that will show current protection levels in the UK, as part of planning for 30x30
+
+Citation
+UNEP-WCMC and IUCN (2021), Protected Planet: The World Database on Protected Areas (WDPA) and World Database on Other Effective Area-based Conservation Measures (WD-OECM) [Online], March 2021, Cambridge, UK: UNEP-WCMC and IUCN. Available at: www.protectedplanet.net.
 
 
     </script>
@@ -26,13 +32,80 @@ This is an evolving version of a map that will show current protection levels in
     <style>
       #mapid { height: 300px; height: 95vh; }
     </style>
+
+    <script src="http://eclipse1979.github.io/leaflet.slider/dist/leaflet-slider.js"></script>
     <script type="application/javascript">
       // Wikipedia centroid of UK
-      var mymap = L.map('mapid').setView([54.093409, -2.89479], 5);
+      var map = L.map('mapid').setView([54.093409, -2.89479], 5);
       var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 11,
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(mymap);
+      }).addTo(map);
+
+
+      // This is just dummy data for now
+      var protected_areas = [{
+          "type": "Feature",
+          "properties": {"protection_level": "Level2"},
+          "geometry": {
+              "type": "Polygon",
+              "coordinates": [[
+                  [100-104.05, 10+48.99],
+                  [100-97.22,  10+48.98],
+                  [100-96.58,  10+45.94],
+                  [100-104.03, 10+45.94],
+                  [100-104.05, 10+48.99]
+              ]]
+          }
+      }, {
+          "type": "Feature",
+          "properties": {"protection_level": "Level1"},
+          "geometry": {
+              "type": "Polygon",
+              "coordinates": [[
+                  [100-109.05, 10+41.00],
+                  [100-102.06, 10+40.99],
+                  [100-102.03, 10+36.99],
+                  [100-109.04, 10+36.99],
+                  [100-109.05, 10+41.00]
+              ]]
+          }
+      }];
+
+      var protected_areas_layer = L.geoJSON(protected_areas, {
+          style: function(feature) {
+              switch (feature.properties.protection_level) {
+                  case 'Level1': return {color: "#ff0000"};
+                  case 'Level2': return {color: "#0000ff"};
+              }
+          }
+      }).addTo(map);
+
+      slider = L.control.slider(function(value) {
+        console.log(value);
+        }, {
+          max: 6,
+          value: 5,
+          step: 1,
+          size: '250px',
+          orientation:'horizontal',
+          collapsed: false,
+          id: 'slider',
+          logo: 'Protection Level',
+        }
+      ).addTo(map);
+
+
+
+      console.log(protected_areas_layer)
+
+      L.geoJSON(someFeatures, {
+          filter: function(feature, layer) {
+              return feature.properties.show_on_map;
+          }
+      }).addTo(map);
+
+
     </script>
   </body>
 </html>
