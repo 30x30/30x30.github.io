@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>30x30</title>
+    <link href="styles.css" rel="stylesheet">
   </head>
   <body>
     <script type="text/template" id="src">
@@ -16,7 +17,6 @@ The UK is one of many nations that have pledged to meet the target. Our committm
 But which land and sea areas should the UK choose to protect to get to the 30% target by 2030?
 
 That's the question the group of people that set up the [30x30 GitHub Organisation](https://github.com/30x30) aim to answer at the [MET Office Climate Data Challenge](https://www.eventbrite.co.uk/e/met-office-climate-data-challenge-tickets-136251966299). 
-
 It isn't a trivial question, and it beings up other questions like:
 
 * What does protection mean anyway? See [IUCN Protected Areas](https://www.iucn.org/theme/protected-areas/about/protected-area-categories) or [on WikiPedia](https://en.wikipedia.org/wiki/IUCN_protected_area_categories)
@@ -36,9 +36,7 @@ The team aim to:
 * Produce a picture or short document that could be linked to from the map of the UK
 
 Hopefully, by investigating different locations and different strategies (e.g. tree planting etc), we'll be able to highlight some of the potential consequences of the different choices that can be made.
-
 None of this is fixed, and we can change the plan over the two days, but we thought having a starting point written down publically might be helpful.
-
 If you'd like to see any changes to this page, or correct any typos, just let james.gardner@geovation.uk know.
 
 Hopefully we can leave our ordinary levels of perfection at the door, and try to enter the hackathon spirit of quickly trying things, quickly correcting mistakes, and quickly making valuable connections with one another.
@@ -50,7 +48,6 @@ Hopefully we can leave our ordinary levels of perfection at the door, and try to
 * Others to be added here ...
 
 If you'd like to join the team in any capacity, you are very welcome! Contact james.gardner@geovation.uk or just add yourself to the official spreadsheet (not sharing it here in case it is not supposed to be public).
-
 If you'd like to go further and be given access to the GitHub organisation just contact james.gardner@geovation.uk with your GitHub account username.
 
 ## Data
@@ -87,51 +84,13 @@ See the [Campaign for Nature 30x30](https://www.campaignfornature.org/news/categ
 
 * [The Economics of Biodiversity - Dasgupta Review](https://www.gov.uk/government/publications/final-report-the-economics-of-biodiversity-the-dasgupta-review)
 
+
+
+
     </script>
     <div id="dst"></div>
+    <div id="mapid"></div>
     <script src="https://unpkg.com/commonmark@0.29.3/dist/commonmark.js"></script>
-    <style>
-      html {
-         font-family: -apple-system, Helvetica, Arial, sans-serif;
-      }
-      html, body, input, textarea, input[type="submit"] {
-         font-size: 20px;
-      }
-      body {
-         margin: 0 auto;
-         max-width: 48rem;
-         box-sizing: border-box;
-         padding: 1rem;
-         line-height: 1.3rem;
-      }
-      h1 {
-         font-size: 3rem;
-         line-height: 4rem;
-         text-align: center;
-      }
-      h2 {
-         line-height: 2rem;
-      }
-      a, a:visited, a:hover, a:link {
-          color:rgb(0, 0, 238);
-      }
-      @media only screen and (max-width: 640px) {
-        html, body, input, textarea, input[type="submit"] {
-           font-size: 16px;
-        }
-        form, form textarea, form input, form input[type="text"] {
-          max-width: 90%;
-        }
-      }
-    </style>
-    <script>
-      var srcElem = document.getElementById('src')
-      var reader = new commonmark.Parser(srcElem.innerHTML);
-      var parsed = reader.parse(srcElem.innerHTML)
-      var writer = new commonmark.HtmlRenderer();
-      var result = writer.render(parsed)
-      document.getElementById('dst').innerHTML = result
-      srcElem.style.display = 'none';
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>

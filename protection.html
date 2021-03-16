@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>30x30</title>
+    <link href="styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""/>
+  </head>
+  <body>
+    <script type="text/template" id="src">
+
+# Protection
+
+This is an evolving version of a map that will show current protection levels in the UK, as part of planning for 30x30
+
+
+    </script>
+    <div id="dst"></div>
+    <div id="mapid"></div>
+    <script src="https://unpkg.com/commonmark@0.29.3/dist/commonmark.js"></script>
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""></script>
+    <style>
+      #mapid { height: 300px; height: 95vh; }
+    </style>
+    <script type="application/javascript">
+      // Wikipedia centroid of UK
+      var mymap = L.map('mapid').setView([54.093409, -2.89479], 5);
+      var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	maxZoom: 11,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(mymap);
+    </script>
+  </body>
+</html>
