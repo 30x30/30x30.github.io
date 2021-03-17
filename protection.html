@@ -46,7 +46,7 @@ UNEP-WCMC and IUCN (2021), Protected Planet: The World Database on Protected Are
       // This is just dummy data for now
       var protected_areas = [{
           "type": "Feature",
-          "properties": {"protection_level": "Level2"},
+          "properties": {"IUCN_CAT": "II"},
           "geometry": {
               "type": "Polygon",
               "coordinates": [[
@@ -59,7 +59,7 @@ UNEP-WCMC and IUCN (2021), Protected Planet: The World Database on Protected Are
           }
       }, {
           "type": "Feature",
-          "properties": {"protection_level": "Level1"},
+          "properties": {"IUCN_CAT": "I"},
           "geometry": {
               "type": "Polygon",
               "coordinates": [[
@@ -74,16 +74,60 @@ UNEP-WCMC and IUCN (2021), Protected Planet: The World Database on Protected Are
 
       var protected_areas_layer = L.geoJSON(protected_areas, {
           style: function(feature) {
-              switch (feature.properties.protection_level) {
-                  case 'Level1': return {color: "#ff0000"};
-                  case 'Level2': return {color: "#0000ff"};
+              switch (feature.properties.IUCN_CAT) {
+                  case 'I': return {color: "#ff0000"};
+                  case 'II': return {color: "#0000ff"};
               }
           }
       }).addTo(map);
+      console.log(protected_areas_layer)
 
-      slider = L.control.slider(function(value) {
-        console.log(value);
-        }, {
+      var nature_reserves = [{
+          "type": "Feature",
+          "properties": {"DESIG": "Nature Reserve"},
+          "geometry": {
+              "type": "Polygon",
+              "coordinates": [[
+                  [10+100-104.05, 10+48.99],
+                  [10+100-97.22,  10+48.98],
+                  [10+100-96.58,  10+45.94],
+                  [10+100-104.03, 10+45.94],
+                  [10+100-104.05, 10+48.99]
+              ]]
+          }
+      }]
+      var nature_reserves_layer = L.geoJSON(nature_reserves, {
+          style: function(feature) {
+              switch (feature.properties.DESIG) {
+                  case 'Nature Reserve': return {color: "#ff00ff"};
+              }
+          }
+      }).addTo(map);
+      console.log(nature_reserves_layer)
+
+
+
+
+      slider = L.control.slider(
+        function(value) {
+          console.log(value, typeof value, value==1);
+          protected_areas_layer.setStyle(function (feature) {
+            if (value === '1') {
+              switch (feature.properties.IUCN_CAT) {
+                  case 'II': return {fillOpacity: 0.2, weight: 1, color: "#ff0000"};
+                  case 'I': return {fillOpacity: 0.2, weight: 1, color: "#0000ff"};
+              }
+            } else if (value === '0') {
+              return {fillOpacity: 0, weight: 0,};
+            } else {
+              switch (feature.properties.IUCN_CAT) {
+                  case 'I': return {fillOpacity: 0.2, weight: 1, color: "#ff0000"};
+                  case 'II': return {fillOpacity: 0.2, weight: 1, color: "#0000ff"};
+              }
+            }
+          })
+        },
+        {
           max: 6,
           value: 5,
           step: 1,
@@ -91,19 +135,18 @@ UNEP-WCMC and IUCN (2021), Protected Planet: The World Database on Protected Are
           orientation:'horizontal',
           collapsed: false,
           id: 'slider',
-          logo: 'Protection Level',
+          logo: 'I',
         }
       ).addTo(map);
 
 
 
-      console.log(protected_areas_layer)
-
-      L.geoJSON(someFeatures, {
-          filter: function(feature, layer) {
-              return feature.properties.show_on_map;
-          }
-      }).addTo(map);
+      var mixed = {
+        "IUCN Protected Areas": protected_areas_layer,
+        "Nature Reserves": nature_reserves_layer,
+      };
+      // Add Layer-Controller
+      L.control.layers(null, mixed).addTo(map);
 
 
     </script>
